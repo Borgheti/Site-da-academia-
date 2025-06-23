@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Fichas de Treino - Bem Estar Academia</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#FFD700" />
+  <style>
+    body { background-color: #000; color: #fff; font-family: Arial, sans-serif; margin: 0; padding: 0; }
+    header { background-color: #FFD700; color: #000; text-align: center; padding: 20px; }
+    .container { padding: 20px; max-width: 800px; margin: auto; }
+    h2 { color: #FFD700; margin-top: 30px; }
+    input, textarea, button {
+      display: block; width: 100%; margin: 10px 0; padding: 10px;
+      font-size: 16px; border: none; border-radius: 5px;
+    }
+    input, textarea { background-color: #111; color: #fff; }
+    button { background-color: #FFD700; color: #000; font-weight: bold; cursor: pointer; }
+    .aluno-card {
+      background: #111; border: 2px solid #FFD700;
+      padding: 15px; margin-top: 10px; border-radius: 8px;
+    }
+    .treino { white-space: pre-wrap; margin-top: 10px; color: #ccc; }
+    #login, #painelProfessor, #painelAluno, #feedbackSection, #listaFeedbacks { display: none; }
+    .logout { text-align: right; margin-bottom: 20px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Bem Estar Academia</h1>
+    <p>Fichas de Treino Personalizadas</p>
+  </header>
+  <div class="container">
+    <div id="login">
+      <h2>Login</h2>
+      <input type="text" id="loginNome" placeholder="Seu nome" />
+      <input type="password" id="loginSenha" placeholder="Senha" />
+      <button onclick="logar()">Entrar</button>
+      <button onclick="mostrarRedefinirSenha()">Esqueci a Senha</button>
+
+      <div id="redefinirSenha" style="display:none; margin-top: 20px;">
+        <h2>Redefinir Senha</h2>
+        <input type="text" id="nomeRedefinir" placeholder="Nome do aluno" />
+        <input type="password" id="novaSenha" placeholder="Nova senha" />
+        <button onclick="redefinirSenha()">Redefinir</button>
+      </div>
+    </div>
+
+    <div id="painelProfessor">
+      <div class="logout"><button onclick="logout()">Sair</button></div>
+      <h2>Adicionar Ficha</h2>
+      <
+input type="text" id="nomeAluno" placeholder="Nome do aluno" />
+      <input type="password" id="senhaAluno" placeholder="Senha do aluno" />
+      <textarea id="treinoAluno" placeholder="Escreva o treino do aluno..."></textarea>
+      <button onclick="adicionarAluno()">Salvar Ficha</button>
+
+      <h2>Pesquisar Aluno para Editar</h2>
+      <input type="text" id="buscaAluno" placeholder="Digite o nome do aluno" oninput="filtrarAlunos()" />
+      <div id="resultadoBusca"></div>
+
+      <h2>Todos os Alunos</h2>
+      <div id="listaAlunos"></div>
+
+      <div id="listaFeedbacks">
+        <h2>Feedbacks Recebidos</h2>
+        <div id="feedbacksRecebidos"></div>
+      </div>
+    </div>
+
+    <div id="painelAluno">
+      <div class="logout"><button onclick="logout()">Sair</button></div>
+      <h2>Sua Ficha</h2>
+      <div id="fichaAluno"></div>
+
+      <div id="feedbackSection">
+        <h2>Deixe seu Feedback</h2>
+        <label>Nota (1 a 5):</label>
+        <input type="number" id="notaFeedback" min="1" max="5" placeholder="Ex: 5" />
+        <textarea id="comentarioFeedback" placeholder="Escreva um comentário (opcional)..."></textarea>
+        <button onclick="enviarFeedback()">Enviar Feedback</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="main.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js')
+        .then(() => console.log("Service Worker registrado"))
+        .catch(err => console.error("Erro no SW:", err));
+    }
+  </script>
+</body>
+</html>
